@@ -25,7 +25,7 @@ class OrgForm(forms.ModelForm):
     class Meta:
         model = Org
         widgets = {'user': forms.HiddenInput()}
-        exclude = ['slug']
+        exclude = ['slug', 'logo', 'qr']
 
     # user = models.ForeignKey(User, null=True, blank=True) 
     # orgname = models.CharField(max_length=150, null=False, blank=False)
@@ -128,6 +128,8 @@ class EventUpdateForm(forms.ModelForm):
 class OrgUpdateForm(forms.ModelForm):
     orgname = forms.CharField(disabled=True)
     about_en = forms.CharField(help_text='<i>short info about organizer </i>')
+    logo = forms.ImageField(help_text='<i>upload your Organizer logo </i>',)
+    qr = forms.ImageField(help_text='<i> WeChat QRcode to contact you</i>',)
     class Meta:
         model = Org
         exclude = ['user']
