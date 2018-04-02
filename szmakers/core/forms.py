@@ -127,7 +127,10 @@ class EventUpdateForm(forms.ModelForm):
 
 class OrgUpdateForm(forms.ModelForm):
     orgname = forms.CharField(disabled=True)
-    about_en = forms.CharField(help_text='<i>short info about organizer </i>')
+    about_en = forms.CharField(help_text='<i>short info about organizer </i>',
+        widget=forms.Textarea(attrs={'rows': 3}))
+    about_cn = forms.CharField(help_text='<i>short info about organizer </i>',
+        widget=forms.Textarea(attrs={'rows': 3}))
     logo = forms.ImageField(help_text='<i>upload your Organizer logo </i>',)
     qr = forms.ImageField(help_text='<i> WeChat QRcode to contact you</i>',)
     class Meta:

@@ -20,12 +20,11 @@
                     {% else %}
                         <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
                     {% endif %}
-                    <p>{{org.orgpage.title}}</p>
-                    <p>{{org.moto}}</p>
-                    <p>{{org.orgpage.richcontent|safe|escape }}</p>
-                    <p>{{org.orgpage.content_en}}</p>
-                    <p>{{org.orgpage.content_en}}</p>
-                    {% if org.logo %}
+                    <p>{{org.about_en}}</p>
+                    <p>{{org.about_cn}}</p>
+                    {{org.richcontent|safe|escape }}
+                    
+                    {% if org.qr %}
                         <img class="img-responsive" src="{{org.qr.url}}" height="250" width="350">
                     {% else %}
                         <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
