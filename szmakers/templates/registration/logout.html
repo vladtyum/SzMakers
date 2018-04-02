@@ -1,0 +1,15 @@
+{% extends "registration/registration_base.html" %}
+{% load i18n %}
+
+{% block title %}{% trans "Logged out" %}{% endblock %}
+
+{% block content %}
+<br>
+<div class="container">
+<div class="row">
+    <div class="col-xs-10 col-sm-6 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-3">
+	<div class="alert alert-info" role="alert">
+		<p><strong>{% trans "Successfully logged out" %}.</strong></p>
+	</div>
+</div></div></div>
+{% endblock %}

@@ -1,0 +1,12 @@
+/*@import url("vendors/font-awesome-4.6.3/css/font-awesome.min.css");*/
+/**/
+@media (max-width: 768px) {
+
+    div#events_date{
+        padding-left: 10px;
+    }
+    div#events_content{
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+}

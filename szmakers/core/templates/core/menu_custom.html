@@ -1,0 +1,51 @@
+{% extends 'core/menu.html' %}
+{% load staticfiles %}
+
+{% block navbar %}
+<div class="container">
+				<ul class="nav navbar-nav navbar-right mobile-bar">
+					<!--See all events with arrow-->
+					<li>
+						<a href="{% url 'events'%}" id="see-events-xs">
+							<!--<span class="menu-icon fa fa-angle-left"></span>-->
+							<span class="menu-icon">
+								<i class="fa fa-arrow-left" aria-hidden="true"></i>
+								<i class="fa fa-calendar" aria-hidden="true"></i>
+								<span>See all events</span>
+							</span>
+							<span class="hidden-xs"><b>Events</b></span>
+							<p>查看所有的活动</p>
+						</a>
+					</li>
+					<li class="hidden-xs">
+						<a href="#">
+							<!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<span><b>Become an organizer</b></span>
+							<p>活动组织者</p>
+						</a>
+					</li>
+					<li class="hidden-xs">
+						<a href="#">
+							<!--<span class="menu-icon fa fa-info"></span>-->
+							<span class="hidden-xs"><b>About SZMksz</b></span>
+							<p class="hidden-xs">关于</p>
+							<!--<span class="visible-xs">About</span>-->
+						</a>
+					</li>
+					<li class="hidden-xs">
+						<a href="#">
+							<!--<span class="menu-icon fa fa-phone"></span>-->
+							<span class="hidden-xs"><b>Contact Us</b></span>
+							<p class="hidden-xs">联系我门</p>
+							<!--<span class="visible-xs">Contact</span>-->
+						</a>
+					</li>
+					<li class="visible-xs">
+						<a href="#navbar-more-show">
+							<span class="menu-icon fa fa-bars"></span>
+							<span>More</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+{% endblock navbar %}

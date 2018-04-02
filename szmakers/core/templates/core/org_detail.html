@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+
+
+{% block content %}
+
+<title>{% block title %}{{org.title}}{% endblock %}</title>
+
+<hr style="margin-top: 30px">
+
+    <div class="container">
+        <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2 ">
+            <div id="event" class="grp-margin-left-xs">
+                <div>
+                    <h3><p>{{org.orgname}}</p></h3>
+                    {% if org.logo %}
+                        <img class="img-responsive" src="{{org.logo.url}}" height="250" width="350">
+                    {% else %}
+                        <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                    {% endif %}
+                    <p>{{org.orgpage.title}}</p>
+                    <p>{{org.moto}}</p>
+                    <p>{{org.orgpage.richcontent|safe|escape }}</p>
+                    <p>{{org.orgpage.content_en}}</p>
+                    <p>{{org.orgpage.content_en}}</p>
+                    {% if org.logo %}
+                        <img class="img-responsive" src="{{org.qr.url}}" height="250" width="350">
+                    {% else %}
+                        <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

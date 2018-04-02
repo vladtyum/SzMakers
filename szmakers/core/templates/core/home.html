@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+
+<body>
+
+<a href="{% url 'auth_login' %}">Login.</a>
+<br/>
+<a href="{% url 'index' %}">Return to the homepage.</a>
+<br/>
+<p>Registration: <a href="{% url 'registration_register' %}">Reg.</a></p>
+<br />
+<p>{{ user }}</p>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load thumbnail%}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'my-css.css' %}">
+</head>
+
+
+<hr style="margin-top: 30px">
+
+    <div class="container">
+        <div class="row">
+
+                <div class="panel panel-default widget" id="upcoming_events">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Organizers</h3>
+                    </div>
+                    <div class="panel-body" id="event_panel">
+                        {% if orgs %}
+                            {% for org in orgs %}
+                                <div class="row list-group-item">
+                                    <div class="row">
+                                    <div class="col-xs-4">
+                                        {% thumbnail org.logo "100x100" crop="center" as im %}
+                                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" id="events_img_tn">
+                                        {% endthumbnail %}
+                                    </div>
+                                    <div class="col-xs-8 ">
+                                        <h4 id="events_title">
+                                            <a href="{{ org.get_absolute_url }}">{{ org.orgname }}</a>
+                                        </h4>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4" id="events_distr">
+                                            <p class="text-right">
+                                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true" >
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 " id="events_content">
+                                        <p>{{org.orgpage.content_en|truncatewords:25}}<a href="#"><small><u> more</u></small></a></p>
+                                        <p>{{org.orgpage.content_cn|truncatechars:50}}<a href="#"><small><u> 更多</u></small></a></p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+    </div>
+
+{% endblock %}

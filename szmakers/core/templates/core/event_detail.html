@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load thumbnail%}
+
+
+{% block menu %}
+ {% include 'core/menu_custom.html' %}
+{% endblock %}
+
+{% block content %}
+
+<title>{% block title %}{{event.title}}{% endblock %}</title>
+
+<hr style="margin-top: 30px">
+
+    <div class="container">
+        <div id="event" class="grp-margin-left-xs">
+            <div>
+                {% if event.thumbnail %}
+                    {% thumbnail event.thumbnail "150x100" crop="center" as im %}
+                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" id="events_img_tn">
+                    {% endthumbnail %}
+                {% else %}    
+                    <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                {% endif %}
+                <h3><p>{{event.title_en}}</p></h3>
+                <b><p>{{event.title_cn}}</p></b>
+                <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span><b> {{event.start_date|date:'Y-m-d'}}, {{event.start_time|date:'H:i'}}</b></p>
+                <p class="text-right"><span class="glyphicon glyphicon-map-marker" aria-hidden="true" ></span> {{event.get_district_display}}</p>
+                <p class="text-right"><span><strong>¥ </strong></span>{{ event.fee }}</p>
+                <p class="text-right">{{event.location_cn}}</p>
+                <p class="text-right">{{event.location_en}}</p>
+                <p>{{event.content_en}}</p>
+                <p>{{event.content_cn}}</p>
+                <p class="text-right">Organized by: {{event.org}}</p>
+                <b>Description</b>
+                <p>{{event.richcontent|safe|escape }}</p>
+                <hr>
+                <p>Scan QR code to contact this activity's organizer</p>
+                <p>扫描二维码,直接加组织者的微信'</p>
+                {% if event.org.qr %}
+                    <img class="img-responsive" src="{{event.org.qr.url}}" height="150" width="150">
+                {% else %}
+                    <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

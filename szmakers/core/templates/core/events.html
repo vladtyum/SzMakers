@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load thumbnail%}
+
+{% block content %}
+<head>
+    <link rel="stylesheet" href="{% static 'my-css.css' %}">
+</head>
+
+
+<hr style="margin-top: 30px">
+
+    <div class="container">
+        <div class="row">
+
+                <div class="panel panel-default widget" id="upcoming_events">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Upcoming events soon</h3>
+                    </div>
+                    <div class="panel-body" id="event_panel">
+                        {% if upcoming_events %}
+                            {% for event in upcoming_events %}
+                                <div class="row list-group-item">
+                                    <div class="row">
+                                    <div class="col-xs-4">
+                                        <a href="{{ event.get_absolute_url }}">
+                                            {% if event.thumbnail %}
+                                                {% thumbnail event.thumbnail "150x100" crop="center" as im %}
+                                                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" id="events_img_tn" class="img-responsive">
+                                                {% endthumbnail %}
+                                            {% else %}    
+                                                <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-8 ">
+                                        <h4 id="events_title"><a href="{{ event.get_absolute_url }}">{{ event.title }}|{{event.title_cn}}</a></h4>
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-4" id="events_date">
+                                            <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span><b> {{event.start_date|date:'Y-m-d'}}, {{event.start_time|date:'H:i'}}</b></p>
+                                        </div>
+                                        <div class="col-xs-4" id="events_distr">
+                                            <p class="text-right">
+                                                <span class="glyphicon glyphicon-map-marker" aria-hidden="true" >
+                                                </span> {{event.get_district_display}}
+                                            </p>
+                                        </div>
+                                        <div class="col-xs-4" id="events_fee">
+                                            <p class="text-right"><span><strong>¥ </strong></span>{{ event.fee }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 " id="events_content">
+                                        <p>{{event.content_en|truncatewords:25}}<a href="{{ event.get_absolute_url }}"><small><u> more</u></small></a></p>
+                                        <p>{{event.content_cn|truncatechars:50}}<a href="{{ event.get_absolute_url }}"><small><u> 更多</u></small></a></p>
+                                        <p class="text-right">Organized by: {{event.org}}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+<!--<div id="past_events">-->
+    <!--<h3 class="text-center ">Past events</h3>-->
+    <!--<div class="row">-->
+        <!--{% for event in past_events %}-->
+            <!--<div class="col-md-3">-->
+                <!--<img src="http://placehold.it/100x60" width="80%" />-->
+                <!--<h4><a href="/{{ event.url }}/">{{ event.name }}</a><h4>-->
+                <!--<h4>{{ event.date|date:"d M y" }}</h4>-->
+                <!--<p><i>{{ event.district }}</i></p>-->
+            <!--</div>-->
+
+            <!--{% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}-->
+        <!--{% endfor %}-->
+    <!--</div>-->
+<!--</div>-->

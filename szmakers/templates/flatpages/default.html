@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>{{ flatpage.title }}</title>
+    <meta name="description" content="{% block description %} SZ-Makers community.{% endblock %}">
+    <meta name="keywords" content="makers, programming, creative,">
+    <link href="static/img/favicon.ico" rel="shortcut icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/bootstrap.min.css' %}" media="screen">
+    <script src="{% static 'jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script type="text/css" src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <script type="text/javascript" src="{% static 'navbar.js' %}"></script>
+</head>
+<body>
+
+{% block menu %}
+    {% include 'core/menu.html' %}
+{% endblock %}
+
+
+<!-- <h2>{{ user.id }}/{{ user }}  </h2>
+<h2>{{ org }}</h2>
+ -->
+
+<div class="container">
+    <div class="col-lg-8 col-md-8 col-lg-offset-2 col-md-offset-2 ">
+        {{ flatpage.content }}    
+    </div>
+</div>
+
+
+<footer>
+    <div class="overlay">
+        <div class="container">
+            {% block footer %}
+                {% include 'core/footer.html' %}
+            {% endblock %}
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

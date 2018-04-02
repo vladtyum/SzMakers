@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{{ form.media }}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+<h2>Edit your event</h2><br>
+<!--     <form id="form" method="post" action="{{ action }}" enctype="multipart/for-data"> -->
+    <form id="form" method="post" action=" "  enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    {{ form.media }}
+    {{ form|crispy }}
+
+      {{ dt_formset.management_form }}
+      {% for dt_form in dt_formset %}
+      {% crispy dt_form %}
+      {% endfor %}
+
+    <input type="button" name="add_datetime" value="Add Another Date">
+
+    <input type="submit" name="submit" value="Submit" class="btn btn-primary">
+    </form>
+<script>
+   $(function()
+   {
+      var n_forms = parseInt($('#id_form-TOTAL_FORMS').val());
+      var fs = $('#form').children('fieldset.dt_fieldset').first();
+      var fs_base = '<fieldset class="dt_fieldset">' + fs.html() + '</fieldset>';
+      var token = fs.prev('input[name="csrfmiddlewaretoken"]').val();
+      var token_base = '<input type="hidden" name="csrfmiddlewaretoken" value="' +
+         token + '">';
+      var btn_base = '<div class="form-group">' + fs.next('div.form-group').html() +
+      '</div>';
+      fs_base = fs_base.replace(/-0-/g, '-kkk-');
+      function remove_dtform(){
+         var res = confirm('This date (with time) will be deleted. Are you sure?');
+         if (res)
+         {
+            var item = $(this).parent('div.controls').parent('div.form-group');
+            item.prev('fieldset').remove();
+            item.prev('input[name="csrfmiddlewaretoken"]').remove();
+            item.remove();
+         }
+      }
+      $('.btn-remove').on('click', remove_dtform);
+      $('input[name="add_datetime"]').on('click', function (ev){
+         $(this).before(token_base);
+         n_forms += 1;
+         var ind = '-' + n_forms.toString() + '-';
+         $(this).before(fs_base.replace(/-kkk-/g, ind));
+         $(this).before(btn_base);
+         var new_btn = $(this).prev('div.form-group').children(
+            'div.controls').children('input[name="remove"]');
+         new_btn.on('click', remove_dtform);
+      });
+      $('#form').on('submit', function(){
+         var res = confirm('Are you sure to save this data?');
+         if (res)
+         {
+            var nfs = $(this).children('fieldset.dt_fieldset');
+            $('#id_form-TOTAL_FORMS').val(nfs.length);
+            nfs.each(function(index){
+               var nodes = $(this).find('[id*="form-"]');
+               for (var i=0; i<nodes.length; i++)
+               {
+                  nodes[i].id = nodes[i].id.replace(/form-\d+-/,
+                     'form-' + index.toString() + '-');
+               }
+               var nodes = $(this).find('[name*="form-"]');
+               for (var i=0; i<nodes.length; i++)
+               {
+                  nodes[i].name = nodes[i].name.replace(/form-\d+-/,
+                     'form-' + index.toString() + '-');
+               }
+               var nodes = $(this).find('[for*="form-"]');
+               for (var i=0; i<nodes.length; i++)
+               {
+                  nodes[i].htmlFor = nodes[i].htmlFor.replace(/form-\d+-/,
+                     'form-' + index.toString() + '-');
+               }
+            });
+         }
+      });
+   });
+</script>
+{% endblock %}

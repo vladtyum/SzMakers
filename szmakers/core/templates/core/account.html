@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+	<div class="alert alert-warning" role="alert">
+		<h4 style="margin-top: 0">Thank you for using SzMakers.com </h4>
+		<p>Please keep in mind, that project is in developing stage, and ment to be OpenSource .</p>
+		<p>So please feel free to conteact developer(s) to help us make the app better </p>
+	</div>
+</div>
+
+<br>
+<br>
+<br>
+
+<div class="container">
+	<div class ="col-sm-3 col-xs-6 text-center">
+		<a href="{% url 'auth_logout' %}" class="btn btn-danger" role="button">LogOut</a></p>
+		<p>Log out of the website</p>
+	</div>
+	<div class ="col-sm-3 col-xs-6 text-center">
+		{% if not is_org %}
+			<a href="{% url 'org-reg' %}" class="btn btn-warning" role="button">Register as Organizer</a></p>
+		<p>Fill up the form to become an event organizer</p>
+		{% else %}
+			{# For organizer #}
+			<a href="{% url 'org-update' %}" class="btn btn-warning" role="button">Edit my Org </a></p>
+			<p>Edit your Organizer profile </p>
+			{# ===== #}
+			<a href="{{ current_org.get_absolute_url }}" class="btn btn-warning" role="button">Your page</a></p>
+			<p>Check how does your page look like </p>
+		{% endif %}
+	</div>
+	<div class ="col-sm-3 col-xs-6 text-center">
+		<a href="{% url 'dashboard' %}" class="btn btn-success " role="button">Dashboard</a></p>
+		<p>Go to Dashboard to manage your Events</p>
+	</div>
+	<div class ="col-sm-3 col-xs-6 text-center">
+		<a href="{% url 'event-reg' %}" class="btn btn-primary" role="button">Publish event</a></p>
+		<p>Publishing event form</p>
+	</div>
+</div></div>
+
+
+	
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+{% endblock %}

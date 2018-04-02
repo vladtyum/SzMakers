@@ -1,0 +1,8 @@
+Django==2.0.3
+django-ckeditor
+django-redis-cache
+Pillow
+psycopg2
+redis
+sorl-thumbnail
+wheel

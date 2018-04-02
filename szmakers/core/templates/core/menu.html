@@ -1,0 +1,171 @@
+{% load staticfiles %}
+
+<head>
+	<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+    <title>Test Navbar</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/bootstrap/css/bootstrap.min.css' %}" media="screen">
+    <script type="text/javascript" src="{% static 'vendors/jquery-1.12.4.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+
+    <script type="text/css" src="{% static 'vendors/bootstrap/js/bootstrap.min.js' %}"></script>
+
+</head>
+</head>
+
+<div class="navbar-more-overlay">
+</div>
+	<nav class="navbar navbar-default navbar-fixed-top animate">
+        <!--Extra scrollable navbar dropping down from the top -->
+		<div class="container navbar-more visible-xs">
+			<form class="navbar-form navbar-left" role="search">
+				<div class="form-group">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Submit</button>
+						</span>
+					</div>
+				</div>
+			</form>
+			<!--Extra scrollable links dropping down from the top -->
+			<ul class="nav navbar-nav">
+				<li>
+					<a href="{% url 'auth_login' %}">
+						<span class="menu-icon fa fa-sign-in"></span>
+						Login | 登陆
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'account' %}">
+						<span class="menu-icon fa fa-user" aria-hidden="true"></span>
+						My account| 我的账号
+					</a>
+				</li>
+				<li>
+					<a href="{% url 'dashboard' %}">
+						<span class="menu-icon fa fa-list"></span>
+						My Events | 我的活动
+					</a>
+				</li>
+				<li>
+					<a href="http://szmakers.com/pages/about/">
+						<span class="menu-icon fa fa-info"></span>
+						About
+					</a>
+				</li>
+				<li>
+					<a href="http://szmakers.com/pages/contact/">
+						<span class="menu-icon fa fa-envelope"></span>
+						ContactUs
+					</a>
+				</li>
+			</ul>
+		</div>
+			<!--<div class="navbar-header visible-xs">-->
+				<!--<a class="navbar-brand" href="#">visible-xs</a>-->
+			<!--</div>-->
+		{% block navbar %}
+
+
+			<div class="container">
+				<ul class="nav navbar-nav navbar-left mobile-bar">
+					{% if request.user.is_authenticated %}
+					<li class="hidden-xs">
+						<a href="{% url 'account' %}">
+							 <!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<!-- <span class="menu-icon fa fa-picture-o"></span> -->
+							<span class="glyphicon glyphicon-user" aria-hidden="true"> 
+
+							</span><strong> {{ user }}</strong>
+							<p><strong>MyAccount</strong></p>
+						</a>
+					</li>
+					<li class="hidden-xs">	
+						<a href="{% url 'dashboard' %}">
+							 <!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<span>我的活动 <b></b></span>
+							<p><strong>MyEvents</strong></p>
+						</a>
+					</li>
+					{% else %}
+					<li class="hidden-xs">
+						<a href="{% url 'auth_login' %}">
+							 <!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<span>登录 <b></b></span>
+							<p><strong>Login</strong></p>
+						</a>
+						{% endif %}
+					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right mobile-bar">
+                    <li class="hidden-xs">
+						<a href="{% url 'index' %}">
+							 <!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<span><b>Home</b></span>
+							<p>主页</p>
+						</a>
+					</li>
+                    <li class="hidden-xs">
+						<a href="{% url 'events' %}">
+							<!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<span><b>Events</b></span>
+							<p>所有活动</p>
+						</a>
+					</li>
+                    <li class="hidden-xs">
+						<a href="{% url 'organizers' %}">
+							<!--<span class="menu-icon fa fa-picture-o"></span>-->
+							<span><b>Organizers</b></span>
+							<p>活动组织者</p>
+						</a>
+					</li>
+					<li class="hidden-xs">
+						<a href="http://szmakers.com/pages/about/">
+							<!--<span class="menu-icon fa fa-info"></span>-->
+							<span class="hidden-xs"><b>About SZMksz</b></span>
+							<p class="hidden-xs">关于当项目</p>
+							<!--<span class="visible-xs">About</span>-->
+						</a>
+					</li>
+					<li class="hidden-xs">
+						<a href="http://szmakers.com/pages/contact/">
+							<!--<span class="menu-icon fa fa-phone"></span>-->
+							<span class="hidden-xs"><b>Contact Us</b></span>
+							<p class="hidden-xs">联系我门</p>
+							<!--<span class="visible-xs">Contact</span>-->
+						</a>
+					</li>
+					<li class="visible-xs">
+						<a href="{% url 'index' %}">
+							<span class="menu-icon fa fa-home"></span>
+                            <span><small>Home</small></span>
+                            <p>首页</p>
+						</a>
+					</li>
+                    <li class="visible-xs">
+						<a href="{% url 'events' %}">
+							<span class="menu-icon fa fa-calendar"></span>
+                            <span>Cal</span>
+                            <p>活动</p>
+						</a>
+					</li>
+                    <li class="visible-xs">
+						<a href="{% url 'organizers' %}">
+							<span class="menu-icon fa fa-group"></span>
+                            <span>Organizers</span>
+                            <p>组织者</p>
+						</a>
+					</li>
+                    <li class="visible-xs">
+						<a href="#navbar-more-show">
+							<span class="menu-icon fa fa-bars"></span>
+							<span>More</span>
+                            <p>更多</p>
+						</a>
+					</li>
+				</ul>
+			</div>
+		{% endblock navbar %}
+	</nav>

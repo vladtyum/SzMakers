@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{{ form.media }}
+{% block content %}
+
+<br>
+<div class="container">
+<div class="row">
+    <div class="col-xs-10 col-sm-6 col-md-4 col-xs-offset-1 col-sm-offset-2 col-md-offset-3">
+
+{% if registered %}
+	<strong>Thank you for registration</strong>
+	<a href="{% url 'index' %}">Return to the homepage.</a><br />{}
+{% else %}
+	<h3>Register here</h3>
+    <hr>
+
+	<form id="org_form" method="post" action="{% url 'org-reg' %}" enctype="multipart/for-data">
+	{% csrf_token %}
+    {{ org_form.media }}
+	{{ org_form|crispy }}
+
+    <div class="col-xs-5 col-sm-5 col-md-5">
+	<input type="submit" name="submit" value="Register" class="btn btn-primary btn-block">
+    </div>
+	</form>
+{% endif %}
+</div></div></div>
+{% endblock %}
+

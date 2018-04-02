@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{{ form.media }}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="conteiner">
+	<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+	<h2>Update Org Profile</h2><br>
+	<form id="event_form" method="post" action="" enctype="multipart/form-data">
+	{% csrf_token %}
+	{{ org_form.media }}
+    {{ org_form|crispy }}
+
+	<input type="submit" name="submit" value="Submit changes" class="btn btn-primary">
+	</form>
+	</div>
+</div>
+
+{% endblock %}

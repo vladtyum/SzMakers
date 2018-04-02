@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% load thumbnail%}
+
+<div class="container">
+	<div class="alert alert-warning" role="alert">
+		<h4 >Thank you for using SzMakers.com </h4>
+		<p>Please keep in mind, that project is in developing stage, and meant to be OpenSource .</p>
+		<p>So please feel free to contact developer(s) to help us make the app better </p>
+	</div>
+</div>
+
+<div class="section">
+<div class = "container">
+<div class="row">
+	<div class="col-sm-4 col-md-4 col-lg-4">
+		<img class="img-responsive" src="{% static 'img/ink-image.png' %}" >
+	</div>
+	<div class="col-md-6">
+		<div id="about">
+			<div class="overlay">
+			  	<div class="container">
+			  		<h1>SZMakers.com community</h1>
+			  		<h3>SZMakers.com 社区</h3>
+			  		<h2>Open Source social event calendar!</h2>
+			  		<h4>开源社交活动日历！</h4>
+			  		<a class="btn" href="{% url 'events' %}">Learn more »</a>
+			  		<div class="text-center">
+				  		<a href="{% url 'event-reg' %}" class="btn btn-primary btn-lg" role="button">Publish Your Event Here</a></p>
+				  		<a href="{% url 'event-reg' %}">点这链接发布你的活动</a>
+			  		</div>
+			  </div>
+		</div>
+	</div>
+</div>
+		
+</div>
+</div>
+</div>
+</div>
+</div>
+		
+
+<!--<header class="image-bg-fluid-height">-->
+        <!--&lt;!&ndash;<img class="img-responsive img-center" src="{% static 'ink-image.png' %}" width="200" height="200" alt="">&ndash;&gt;-->
+<!--</header>-->
+<!--<p class="text-right" style="color: #8c8c8c">Should be our pic. some dummy picked from <a href="http://tinwhiskers.net/wp-content/uploads/2014/08/IMG_2542.jpg">here</a></p>-->
+
+		<div style="margin-top: 30px">
+		    <img class="img-responsive center-block" src="{% static 'img/IMG_2542_1.jpg'%}" height="250" width="90%">
+		    <p class="text-right" style="color: #8c8c8c">Should be our pic. Some random picked from <a href="http://tinwhiskers.net/wp-content/uploads/2014/08/IMG_2542.jpg">here</a> for now</p>
+		</div>
+
+
+
+	<!-- Value proposition -->
+	<div class="container">
+	  	<div id="value" class="row">
+	  		<div class="col-md-6">
+	  			<h3>Intro</h3>
+	  			<p>Just some intoruduction of activity and all that stuf ... who are makers, whot do we do in SZ, and so on  </p>
+                <br>
+	  			<p>J只是一些介绍活动和所有STUF......谁是决策者，谁做我们做SZ，等</p>
+
+	  		</div>
+	  		<div class="col-md-6">
+	  			<h3>Interests</h3>
+	  			<p>Typical interests enjoyed by the maker culture include engineering-oriented pursuits such as electronics, robotics, 3-D printing, and the use of CNC tools, as well as more traditional activities such as metalworking, woodworking, and, mainly, its predecessor, the traditional arts and crafts. </p>
+	  			<br>
+                <p>T由制造商文化享受的典型领域包括面向工程的活动，如电子，机器人，3D打印，以及使用的数控刀具，以及如金属加工，木材加工较为传统的活动，主要是，它的前身，传统手工艺。</p>
+	  		</div>
+	  	</div>
+	</div>
+
+
+	<!-- Apply for ticket -->
+	<div id="apply" style="margin-top: 30px">
+		<div class="overlay">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12" style="background-color:lightgoldenrodyellow">
+						<h1>Events publication is open!</h1>
+                        <p>You can now send your activity inf, get in published on the calender, and informed all subscribed members</p>
+                            <p>你现在可以把你的活动信息，得到在日历上公布，并通知所有订阅的成员</p>
+						<a class="btn" href="">Apply for event</a></p>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr style="margin-top: 30px">
+    {% if upcoming_events %}
+    <div class="container">
+        <div id="events">
+            <h3 class="text-center">Upcoming events soon</h3>
+            <div class="row">
+                {% for event in upcoming_events %}
+                    <div class="col-md-3">
+                        <h5><a href="{{ event.get_absolute_url }}">{{ event.title }}</a><h5>
+                            <a href="{{ event.get_absolute_url }}">
+                                {% if event.thumbnail %}
+                                    {% thumbnail event.thumbnail "150x100" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" id="events_img_tn">
+                                    {% endthumbnail %}
+                                {% else %}    
+                                    <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                                {% endif %}
+                            </a>
+                        <h4><a href="/events/{{event.slug}}">{{ event.name }}</a><h4>
+                        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span><b> {{event.start_date|date:'Y-m-d'}}, {{event.start_time|date:'H:i'}}</b></p>
+                        <p><i>{{ event.district }}</i></p>
+                    </div>
+
+                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="container">
+        <div id="events">
+            <h3 class="text-center ">Past events</h3>
+            <div class="row">
+                {% for event in past_events %}
+
+                    <div class="col-md-3">
+                        <h5><a href="{{ event.get_absolute_url }}">{{ event.title }}</a><h5>
+                            <a href="{{ event.get_absolute_url }}">
+                                {% if event.thumbnail %}
+                                    {% thumbnail event.thumbnail "150x100" crop="center" as im %}
+                                        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" id="events_img_tn">
+                                    {% endthumbnail %}
+                                {% else %}    
+                                    <img class="img-responsive" src="{% static 'no-image-icn.png' %}">
+                                {% endif %}
+                            </a>
+                        <h4><a href="/events/{{event.slug}}">{{ event.name }}</a><h4>
+                        <p><span class="glyphicon glyphicon-time" aria-hidden="true"></span><b> {{event.start_date|date:'Y-m-d'}}, {{event.start_time|date:'H:i'}}</b></p>
+                        <p><i>{{ event.district }}</i></p>
+                    </div>
+
+
+
+                    {% if forloop.counter|divisibleby:4 %}</div><div class="row">{% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+
+	<!-- Become a coach! -->
+	<div id="coach">
+	  	<div class="overlay">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-5">
+						<h2>Help us and become a member!</h2>
+						<p>Some stuff about joining out activity and cotributing in it</p>
+                        <p>有些东西有关加入了活动，并在其中贡献</a>.
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<hr>
+
+	<!-- Partners / Sponsors -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" id="sponsors">
+				<h3>Partners and sponsors</h3>
+				<p>Partenrs, thanks to them </p>
+
+				<div class="row">
+					<div class="col-md-4">
+						<!--<a href=""><img src="http://lorempixel.com/technics/400/200/" width="80%" /></a>-->
+					</div>
+					<div class="col-md-4">
+						<!--<a href=""><img src="http://lorempixel.com/technic/300/200/" width="60%" /></a>-->
+					</div>
+
+				</div>
+
+				<p>If you want to contribute and support our activity, please get in touch: <a href="">vladtyum@yahoo.com</a></p>
+
+			</div>
+
+		</div>
+        <div class="cls"></div>
+
+	</div>
+
+{% endblock %}
