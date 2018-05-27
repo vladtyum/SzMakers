@@ -19,4 +19,8 @@ urlpatterns = [
     url(r'^account/', views.account , name='account'),
     url(r'^event-edit/(?P<id>[0-9]+)/', views.eventEdit, name='event-edit'),
     url(r'^org-update/', views.orgProfileUpdate, name='org-update'),
+    url(r'^about/$', views.about, name='about'),
+    url(r'^contact/$', views.contact, name='contact'),
+    url(r'^register-temp/$', views.register_temp, name='register_temp'),
+
 ]

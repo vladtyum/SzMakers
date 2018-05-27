@@ -83,7 +83,7 @@ class EventForm(forms.ModelForm):
     content_cn = forms.CharField(
                     help_text='<i>in CN , short info for notifications ans stuff </i>', 
                     widget=forms.Textarea(attrs={'rows': 3}))
-    richcontent = forms.CharField(widget=CKEditorWidget(attrs={'cols':50,'rows': 3}))
+    richcontent = forms.CharField(widget=CKEditorUploadingWidget(attrs={'cols':50,'rows': 3}))
 
     class Meta:
         model = Event

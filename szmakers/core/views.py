@@ -33,6 +33,18 @@ def index(request):
     })
 
 
+def about(request):
+    return render(request, 'core/about.html', {})
+
+
+def contact(request):
+    return render(request, 'core/contact.html', {})
+
+
+def register_temp(request):
+    return render(request, 'core/register_temp.html', {})
+
+
 def all_events(request):
 
     upcoming_events = Event.objects.filter(is_published=True, start_date__gte=timezone.now()).order_by('start_date')
